@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  ingest:
+    build: .
+    ports:
+      - "1935:1935"
+    volumes:
+      - ./record:/record
+  cdn:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./record:/usr/share/nginx/html
+      - ./nginx-cdn.conf:/etc/nginx/nginx.conf:ro
